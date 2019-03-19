@@ -9,8 +9,8 @@ const authentication = (req, res, next) =>{
   if(!header || header===""){
       return res.status(401).json({ error:"Authentication failed" });
   }else{
-    const splitingToken = header;
-    const token = splitingToken;
+    //const splitingToken = header;
+    const token = header;
     // verify token
     jwt.verify(token, process.env.secretKey, (error,decode) =>{
         if(error){
