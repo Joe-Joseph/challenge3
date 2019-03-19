@@ -18,14 +18,14 @@ exports.signin=(req,res)=>{
                 };
                 // generate token
                 const token = jwt.sign(generate, process.env.secretKey, { expiresIn: "1day" })
-                res.status(200).json({ generate, token: token });
+                res.status(200).json({ Id: generate, token: token });
                 }
                 else{
-                    res.status(400).json({ error: "Incorrect password" });
+                    return res.status(400).json({ error: "Incorrect password" });
                 }
          })
          .catch(error=>{
-            //console.log(error);
+            console.log(error);
             return res.status(500).json({error});
          })
    }

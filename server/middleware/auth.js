@@ -1,24 +1,27 @@
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-dotenv.config()
+// dotenv configuration
+dotenv.config();
 
-exports. authenticate = (req, res, next) =>{
-    try{
-        const splitHeader = header.split(" ")
-        const token = splitHeader[1]
-
-        jwt.verify(token, process.env.secretKey)
-        const userId = token.userId
-        if(req.body.userId && req.body.userId !== userId){
-            throw 'Invalid user ID'
-        }else{
-            next()
-        }  
-    }
-    catch{
-        res.status(401).json({
-            error: new Error('Invalid request!')
-          });
-    }
+const authentication = (req, res, next) =>{
+  const header = req.headers.authorization;
+  if(!header || header===""){
+      return res.status(401).json({ error:"Authentication failed" });
+  }else{
+    const splitingToken = header;
+    const token = splitingToken;
+    // verify token
+    jwt.verify(token, process.env.secretKey, (error,decode) =>{
+        if(error){
+            return res.status(401).json({error});
+        } else {
+        // 
+          req.user=decode;
+          //console.log(decode);
+          next();
+        }
+    })
+  }
 }
+export default authentication;
