@@ -24,14 +24,14 @@ app.use((req,res,next)=>{
 })
 
 // catch errors
-// app.use((error,req,res,next)=>{
-//   res.status(error.status || 500);
-//   res.json({
-//       error:{
-//           message:error.message
-//       }
-//   })
-// })
+app.use((error,req,res,next)=>{
+  res.status(error.status || 500);
+  res.json({
+      error:{
+          message:error.message
+      }
+  })
+})
 
 // eslint-disable-next-line no-undef
 const port = process.env.PORT || 4000
