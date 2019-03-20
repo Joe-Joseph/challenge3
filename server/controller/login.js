@@ -8,7 +8,7 @@ exports.signin=(req,res)=>{
          .then(user=>{
              // when user does not exist
              if(user.rows.length===0){
-                 return res.status(400).json({error:"email not found."})
+                 return res.send({status:400, error:"email not found."})
              }
              // check whether the entered password match the on in database
              const compare = bcrypt.compareSync(req.body.password, user.rows[0].password);
@@ -18,10 +18,10 @@ exports.signin=(req,res)=>{
                 };
                 // generate token
                 const token = jwt.sign(generate, process.env.secretKey, { expiresIn: "1day" })
-                res.status(200).json({ Id: generate, token: token });
+                res.send({status:200, id:user.rows[0].id, token: token });
                 }
                 else{
-                    return res.status(400).json({ error: "Incorrect password" });
+                    return res.send({status:400, error: "Incorrect password" });
                 }
          })
          .catch(error=>{

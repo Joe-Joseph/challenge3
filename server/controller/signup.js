@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import pool from '../config/connection'
 import jwt from 'jsonwebtoken'
+import _ from 'lodash'
 import validateUser from '../helpers/validation'
 
 exports.createAccount = (req, res) => {
@@ -42,7 +43,7 @@ exports.createAccount = (req, res) => {
                 return res.status(500).json({error});
                 }
                 // eslint-disable-next-line no-undef
-                return res.status(201).json({token:`Bearer ${ token }`,user:user.rows});
+                return res.send({status:201, token:`Bearer ${ token }`, data: _.pick(user.rows[0], ['id', 'firstname', 'lastname', 'email'])});
               })
             })
             .catch(err=>{
