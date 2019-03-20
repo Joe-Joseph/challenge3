@@ -5,7 +5,7 @@ exports.sendEmail=(req,res)=>{
         message:req.body.message,
         senderId:req.user.id,
         receiverId:parseInt(req.body.receiverId),
-        status:"sent",
+        status:"unread",
     };
     // Save email inside messages table
    const sql="INSERT INTO messages (subject,message,sender_id,receiver_id,status) VALUES($1,$2,$3,$4,$5) RETURNING *";
