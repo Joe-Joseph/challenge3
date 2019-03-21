@@ -163,3 +163,29 @@ You will get the following object
 }
 
 ```
+
+**POST http://localhost:4000/api/v2/messages**
+
+**Endpoint**
+
+```http://localhost:4000/api/v2/messages```
+
+This endpoint sends email
+
+**HEADERS**
+
+```Content-Typeapplication/json```
+
+**authorization**
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImlhdCI6MTU1MzA2MDgzOSwiZXhwIjoxNTUzMTQ3MjM5fQ.4B4JHMz8JlEDNit-Hdoa2WALWO5wLAniZyQDcbgfJf0
+BODY
+
+```
+{
+	"subject":"Greetings",
+	"message":"what's up?",
+	"receiverId":12
+}
+
+```
