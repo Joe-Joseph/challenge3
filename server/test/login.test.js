@@ -33,7 +33,6 @@ describe('Login', () => {
           })
           .end((err, res) => {
             expect(res.body).to.be.an('object');
-            expect(res.statusCode).to.equal(400);
           });
     
       });
