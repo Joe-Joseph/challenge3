@@ -6,9 +6,9 @@ exports.unreadEmails=(req,res)=>{
     pool.query(sql,[req.user.id,"unread"])
      .then(unread=>{
          if(unread.rows.length===0){
-            return res.send({status:404, error:"sorry there is no unread messages."});
+            return res.status(404).json({status:404, error:"sorry there is no unread messages."});
          }
-         return res.send({status:200, data: unread.rows});
+         return res.status(200).json({status:200, data: unread.rows});
      })
      .catch(error=>{
         //  console.log(error);
