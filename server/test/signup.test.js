@@ -20,7 +20,7 @@ describe('Create a user', () => {
       .send(user)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('status');
+        expect(res.body).to.have.property('error');
         expect(res.body.status).to.equal(400);
       });
     })
