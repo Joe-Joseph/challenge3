@@ -7,7 +7,7 @@ dotenv.config();
 const authentication = (req, res, next) =>{
   const header = req.headers.authorization;
   if(!header || header===""){
-      return res.status(401).json({ error:"Authentication failed" });
+      return res.send({status:401, error:"Authentication failed"});
   }else{
     //const splitingToken = header;
     const token = header;
