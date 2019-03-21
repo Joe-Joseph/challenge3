@@ -22,7 +22,10 @@ describe('Create a user', () => {
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('error');
         expect(res.body.status).to.equal(400);
+        expect(res.body).to.have.property('status');
+        //console.log (res.body);
       });
+      
     })
 
     it('First name length must be at lest 3 characters long', () => {
