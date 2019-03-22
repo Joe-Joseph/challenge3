@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/Joe-Joseph/challenge3.svg?branch=develop)](https://travis-ci.org/Joe-Joseph/challenge3)
+
+[![Coverage Status](https://coveralls.io/repos/github/Joe-Joseph/challenge3/badge.svg?branch=develop)](https://coveralls.io/github/Joe-Joseph/challenge3?branch=develop)
+
 # EPIC Mail
 
 **EPIC Mail** is Web application that will help people to interact and exchange messages/information over the internet.
