@@ -7,7 +7,7 @@ exports.sendEmail=(req,res)=>{
         senderId:req.user.id,
         receiverId:parseInt(req.body.receiverId),
         status:"unread",
-        createdOn:moment().format('LL')
+        createdOn:moment().utc().format('LL')
     };
     // Save email inside messages table
    const sql="INSERT INTO messages (subject,message,sender_id,receiver_id,status) VALUES($1,$2,$3,$4,$5) RETURNING *";
@@ -18,7 +18,7 @@ exports.sendEmail=(req,res)=>{
         //console.log("Any2");
         // check if message saved successfully inside messages table
         if(messages.rows.length===0){
-            return res.send({status:500, error:"sorry message not sent, try again"});
+            return res.status(500).json({status:500, error:"sorry message not sent, try again"});
         }else{
         // Then save sent email into sent table
         const sents={
@@ -28,7 +28,7 @@ exports.sendEmail=(req,res)=>{
         pool.query(sentSql,[sents.userId, sents.messageId])
           .then(sent=>{
               //console.log("Any3");
-              return res.send({status:201, message: " message sent successfully ", data: messages.rows[0]});
+              return res.status(201).json({status:201, message: " message sent successfully ", data: messages.rows[0]});
           })
           .catch((error)=>{
               // console.log(error);

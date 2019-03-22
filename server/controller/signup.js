@@ -16,16 +16,15 @@ exports.createAccount = (req, res) => {
 
   const { error } = validateUser(req.body)
 
-  if (error) {
-    res.send({ status: 400, error: error.details[0].message })
-    return
-  }
+  if (error) 
+  return res.status(400).json({ status : 400, error: error.details[0].message })
 
   //    Checking if the entered email does not exist
   const myQuery = "SELECT * FROM users WHERE email = $1"
   pool.query(myQuery,[newUser.email])
       .then(email=>{
-        if(email.rows.length!==0) return res.send({status: 400, error: "Email is already registered."})
+        if(email.rows.length!==0) 
+        return res.status(400).json({status: 400, error: "Email is already registered."})
 
         // save to database
         const save = "INSERT INTO users (firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *"
@@ -39,11 +38,11 @@ exports.createAccount = (req, res) => {
 
               // eslint-disable-next-line no-undef
               jwt.sign(generate, process.env.secretKey, {expiresIn: "24h"}, (error, token) =>{
-                if(error) {
-                return res.status(500).json({error});
-                }
+                if(error)
+                return res.status(500).json({status:500, error});
                 // eslint-disable-next-line no-undef
-                return res.send({status:201, token:`Bearer ${ token }`, data: _.pick(user.rows[0], ['id', 'firstname', 'lastname', 'email'])});
+                return res.status(201)
+                  .json({status: 201, token:`Bearer ${ token }`, data: _.pick(user.rows[0], ['id', 'firstname', 'lastname', 'email'])});
               })
             })
             .catch(err=>{

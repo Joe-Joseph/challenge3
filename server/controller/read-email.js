@@ -5,13 +5,13 @@ exports.readEmail=(req,res)=>{
     pool.query(sql,[messageId,req.user.id])
      .then(messages=>{
          if(messages.rows.length===0){
-            return res.send({status:404, error:"sorry message not found."});
+            return res.status(404).json({status:404, error:"sorry message not found."});
          }else{
               // update message
               const updateMessage="UPDATE messages SET status=$1 WHERE message_id=$2 RETURNING *";
               pool.query(updateMessage,["read",messageId])
                 .then(data=>{
-                    return res.send({status:200, data:data.rows[0]});
+                    return res.status(200).json({status:200, data:data.rows[0]});
                 })
                 .catch((errors)=>{
                     //console.log(errors);

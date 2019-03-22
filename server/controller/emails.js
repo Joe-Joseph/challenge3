@@ -5,9 +5,9 @@ exports.getEmails = (req, res)=>{
      .then(messages =>{
          // Check if there is any email
          if(messages.rows.length === 0){
-             return res.send({ status:404, message:"sorry there no messages" });
+             return res.status(404).json({ status:404, message:"sorry there no messages" });
          }
-         return res.send ({status: 200, data: messages.rows });
+         return res.status(200).json({ status: 200, data: messages.rows });
      })
      .catch(error=>{
         //  console.log(error);
