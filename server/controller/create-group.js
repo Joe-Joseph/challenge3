@@ -23,7 +23,7 @@ exports.createGroup=(req,res)=>{
     .then(group =>{
 
         // eslint-disable-next-line no-undef
-        return res.send({ status:201, data: group.rows[0] });
+        return res.status(201).json({ status:201, data: group.rows[0] });
     })
     .catch(err=>{
       //console.log(err);
