@@ -12,6 +12,7 @@ import createGroupCrtl from '../controller/create-group'
 import getGroupCrtl from '../controller/get-groups'
 import updateGroupCrtl from '../controller/update-group'
 import deleteGroupCtrl from '../controller/delete-group'
+import addMemberCtrl from '../controller/add-member'
 
 const router = express.Router()
 
@@ -27,5 +28,6 @@ router.post('/groups', authencation, createGroupCrtl.createGroup)
 router.get('/groups', authencation, getGroupCrtl.getGroups)
 router.patch('/groups/:groupId', authencation, updateGroupCrtl.updateGroup)
 router.delete('/groups/:groupId', authencation, deleteGroupCtrl.deleteGroup)
+router.post('/groups/:groupId/users', authencation, addMemberCtrl.addMember)
 
 export default router
