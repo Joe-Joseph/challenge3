@@ -1,10 +1,14 @@
 import pool from "../config/connection";
+import validateGroup from "../helpers/groups";
 exports.createGroup=(req,res)=>{
     const group={
         name:req.body.name,
         role:req.body.role,
         ownerId: req.user.id
     };
+  
+  const { error } = validateGroup(req.body)
+  if(error) return res.status(400).json({ status: 400, error: error.details[0].message })
 
   const selectGroupsSql = " SELECT * FROM groups WHERE name = $1";
   pool.query(selectGroupsSql, [group.name])
