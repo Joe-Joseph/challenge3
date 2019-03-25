@@ -10,6 +10,7 @@ import authencation from '../middleware/auth'
 //import deleteEmailctrl from '../controller/delete-email'
 import createGroupCrtl from '../controller/create-group'
 import getGroupCrtl from '../controller/get-groups'
+import updateGroupCrtl from '../controller/update-group'
 
 const router = express.Router()
 
@@ -23,5 +24,6 @@ router.post('/messages', authencation, sendEmailCtrl.sendEmail)
 //router.delete('/messages/:messageId', authencation, deleteEmailctrl.deleteEmail)
 router.post('/groups', authencation, createGroupCrtl.createGroup)
 router.get('/groups', authencation, getGroupCrtl.getGroups)
+router.patch('/groups/:groupId', authencation, updateGroupCrtl.updateGroup)
 
 export default router
