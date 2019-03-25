@@ -1,4 +1,4 @@
-import moment from 'moment'
+//import moment from 'moment'
 import pool from "../config/connection";
 exports.sendEmail=(req,res)=>{
     const message={
@@ -6,8 +6,7 @@ exports.sendEmail=(req,res)=>{
         message:req.body.message,
         senderId:req.user.id,
         receiverId:parseInt(req.body.receiverId),
-        status:"unread",
-        createdOn:moment().utc().format('LL')
+        status:"unread"
     };
     // Save email inside messages table
    const sql="INSERT INTO messages (subject,message,sender_id,receiver_id,status) VALUES($1,$2,$3,$4,$5) RETURNING *";
