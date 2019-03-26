@@ -14,6 +14,7 @@ import updateGroupCrtl from '../controller/update-group'
 import deleteGroupCtrl from '../controller/delete-group'
 import addMemberCtrl from '../controller/add-member'
 import deleteMemberctrl from '../controller/delete-member'
+import groupMailCtrl from '../controller/send-group-mail'
 
 const router = express.Router()
 
@@ -31,5 +32,6 @@ router.patch('/groups/:groupId', authencation, updateGroupCrtl.updateGroup)
 router.delete('/groups/:groupId', authencation, deleteGroupCtrl.deleteGroup)
 router.post('/groups/:groupId/users', authencation, addMemberCtrl.addMember)
 router.delete('/groups/:groupId/users/:userId', authencation, deleteMemberctrl.deleteMember)
+router.post('/groups/:groupId/messages', authencation, groupMailCtrl.groupMail)
 
 export default router
